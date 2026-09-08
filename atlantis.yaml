@@ -1,0 +1,25 @@
+version: 3
+
+projects:
+- name: lab-compute
+  dir: lab/compute-engine
+  workflow: terragrunt
+  autoplan:
+    enabled: true
+
+- name: nl-compute
+  dir: nl/compute-engine
+  workflow: terragrunt
+  autoplan:
+    enabled: true
+
+workflows:
+  terragrunt:
+    plan:
+      steps:
+      - run: terragrunt init
+      - run: terragrunt plan -out=$PLANFILE
+
+    apply:
+      steps:
+      - run: terragrunt apply $PLANFILE
