@@ -1,3 +1,8 @@
+terraform {
+backend "gcs" {}
+}
+
+
 resource "google_compute_instance" "vm" {
 
   name         = var.instance_name
