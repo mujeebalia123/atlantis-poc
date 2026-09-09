@@ -9,8 +9,7 @@ projects:
     autoplan:
       enabled: true
       when_modified:
-        - "*.hcl"
-        - "*.tf"
+        - "**/*.hcl"
         - "../../modules/**/*.tf"
 
 workflows:
