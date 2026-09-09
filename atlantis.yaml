@@ -4,6 +4,7 @@ projects:
   - name: lab-compute-engine
     dir: lab/compute-engine
     workspace: default
+    workflow: terragrunt
 
     autoplan:
       enabled: true
