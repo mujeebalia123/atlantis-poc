@@ -9,16 +9,20 @@ projects:
     autoplan:
       enabled: true
       when_modified:
-        - "**/*.hcl"
-        - "../../modules/**/*.tf"
+        - "*.hcl"
+        - "*.tf*"
+        - "../../modules/**/*.tf*"
 
 workflows:
   terragrunt:
     plan:
       steps:
+        - env:
+            name: TF_IN_AUTOMATION
+            value: "true"
         - run: terragrunt init
-        - run: terragrunt plan -out=$PLANFILE
+        - run: terragrunt plan -input=false -no-color -out=$PLANFILE
 
     apply:
       steps:
-        - run: terragrunt apply $PLANFILE
+        - run: terragrunt apply -input=false $PLANFILE
