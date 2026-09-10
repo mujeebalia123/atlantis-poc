@@ -21,8 +21,8 @@ workflows:
             name: TF_IN_AUTOMATION
             value: "true"
         - run: terragrunt init
-        - run: terragrunt plan -input=false -no-color -out=$PLANFILE
+        - run: terragrunt plan -lock=false -input=false -no-color
 
     apply:
       steps:
-        - run: terragrunt apply -input=false $PLANFILE
+        - run: terragrunt apply
