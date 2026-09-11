@@ -24,5 +24,6 @@ resource "google_compute_instance" "vm" {
 
   labels = {
     environment = var.environment
+    owner = "pratyush"
   }
 }

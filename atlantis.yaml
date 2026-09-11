@@ -4,21 +4,25 @@ projects:
   - name: lab-compute-engine
     dir: lab/compute-engine
     workspace: default
+    workflow: terragrunt
 
     autoplan:
       enabled: true
       when_modified:
         - "*.hcl"
-        - "*.tf"
-        - "../../modules/**/*.tf"
+        - "*.tf*"
+        - "../../modules/**/*.tf*"
 
 workflows:
   terragrunt:
     plan:
       steps:
+        - env:
+            name: TF_IN_AUTOMATION
+            value: "true"
         - run: terragrunt init
-        - run: terragrunt plan -out=$PLANFILE
+        - run: terragrunt plan -lock=false -input=false -no-color
 
     apply:
       steps:
-        - run: terragrunt apply $PLANFILE
+        - run: terragrunt apply
